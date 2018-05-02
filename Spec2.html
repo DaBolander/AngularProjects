@@ -1,0 +1,101 @@
+<html>
+	<head>
+		<title>Spec 2</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">		
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	</head>
+	<body ng-app="myApp">
+		<div class="container">
+			<div id="mainDiv" class="main-div" ng-controller="votingCtrl">			
+				<div class="female-div">
+					<img src="people.png" alt="Female" />
+					<h1>FEMALE</h1>				
+					<p ng-style="femaleCustomStyle">{{femaleResult}}% </p>				
+					<button class="btn btn-success" ng-click="mainCount(1)">Vote</button>
+				</div>
+				<div>
+					<img src="man.png" alt="Male" />
+					<h1>MALE</h1>				
+					<p ng-style="maleCustomStyle">{{maleResult}}% </p>				
+					<button class="btn btn-success" ng-click="mainCount(2)">Vote</button>				
+				</div>
+			</div>
+		</div>
+		<script>
+			angular.module('myApp', [])
+			  .controller('votingCtrl', ['$scope', function($scope) {		  
+				
+				$scope.femaleCount = 0.0;
+				$scope.maleCount = 0.0;
+				$scope.femaleResult = 0;
+				$scope.maleResult = 0;
+				$scope.femaleCustomStyle = {};
+				$scope.maleCustomStyle = {};
+				
+				$scope.mainCount = function(val) {
+					callMe(val);
+				};					
+				
+				function callMe(who){
+					if(who === 1)
+					{
+						$scope.femaleCount++;					
+					}
+					
+					if(who === 2)
+					{
+						$scope.maleCount++;					
+					}
+					
+					if($scope.maleCount > $scope.femaleCount)
+					{
+						$scope.maleCustomStyle = {
+							"color" : "green"
+						}
+						
+						$scope.femaleCustomStyle = {
+							"color" : "red"
+						}						
+					}
+					else if($scope.femaleCount > $scope.maleCount)
+					{
+						$scope.femaleCustomStyle = {
+							"color":"green"
+						}
+						
+						$scope.maleCustomStyle = {
+							"color":"red"
+						}
+					}
+					
+					$scope.result = $scope.femaleCount + $scope.maleCount;
+					
+					$scope.femaleResult = (($scope.femaleCount/$scope.result)*100).toFixed(0);
+					$scope.maleResult = (($scope.maleCount/$scope.result)*100).toFixed(0);
+				}
+			}]);
+		</script>
+		
+		
+		<style>
+			.main-div{
+				display: inline-flex;    
+				position: absolute;
+				margin: auto;
+				left: 40%;
+				top: 50%;
+			}	
+
+			.female-div{
+				width: 250px;
+			}		
+
+			img {
+				height: 100px;
+				width: 100px;
+			}
+		</style>
+		
+		
+	</body>
+</html>
