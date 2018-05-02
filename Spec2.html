@@ -6,17 +6,21 @@
 	</head>
 	<body ng-app="myApp">
 		<div class="container">
-			<div id="mainDiv" class="main-div" ng-controller="votingCtrl">			
+			<div class="msg">
+				<h1>I am...</h1>
+			</div>	
+			<div id="mainDiv" class="main-div" ng-controller="votingCtrl">	
+						
 				<div class="female-div">
-					<img src="people.png" alt="Female" />
-					<h1>FEMALE</h1>				
-					<p ng-style="femaleCustomStyle">{{femaleResult}}% </p>				
+				<h1 class="userType">FEMALE</h1>
+					<img src="people.png" alt="Female" />									
+					<h1 ng-style="femaleCustomStyle">{{femaleResult}}% </h1>				
 					<button class="btn btn-success" ng-click="mainCount(1)">Vote</button>
 				</div>
-				<div>
-					<img src="man.png" alt="Male" />
-					<h1>MALE</h1>				
-					<p ng-style="maleCustomStyle">{{maleResult}}% </p>				
+				<div class="male-div">
+					<h1 class="userType">MALE</h1>	
+					<img src="man.png" alt="Male" />								
+					<h1 ng-style="maleCustomStyle">{{maleResult}}% </h1>				
 					<button class="btn btn-success" ng-click="mainCount(2)">Vote</button>				
 				</div>
 			</div>
@@ -78,18 +82,29 @@
 		
 		
 		<style>
+			.msg{
+				top: 40%;
+				left: 48%;
+				margin: auto;
+				position: absolute;	
+			}
+			.userType{
+				color: lightgrey;
+			}
 			.main-div{
 				display: inline-flex;    
 				position: absolute;
 				margin: auto;
 				left: 40%;
 				top: 50%;
-			}	
-
+			}
 			.female-div{
 				width: 250px;
+				text-align: center;
 			}		
-
+			.male-div{
+				text-align: center;
+			}
 			img {
 				height: 100px;
 				width: 100px;
